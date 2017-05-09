@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@mipmap/ic_local_hospital_black_24dp"
+        android:title="疾病自查" />
+
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@mipmap/ic_book_black_24dp"
+        android:title="医学百科" />
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@mipmap/ic_add_location_black_24dp"
+        android:title="附近医院" />
+
+</menu>
