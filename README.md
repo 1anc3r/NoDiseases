@@ -1,5 +1,5 @@
 # 无疾
-<img src="https://raw.githubusercontent.com/1anc3r/NoDiseases/master/app/src/main/res/mipmap-hdpi/ic_launcher.png" width = "96" height = "96" alt="icon"/>
+<img src="https://github.com/1anc3r/NoDiseases/blob/master/app/src/main/ic_launcher-web.png" width = "96" height = "96" alt="icon"/>
 
 ## 应用简介:
 无疾 —— 即没有疾病。旨在提供疾病自查及医疗资讯的资讯类应用。
