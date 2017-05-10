@@ -28,7 +28,7 @@
             android:id="@+id/tv_head"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="七磅 — 灵魂的重量"
+            android:text="无疾 — 珍爱生命,远离疾病"
             android:textColor="#FFFFFF"
             android:textSize="14sp" />
 

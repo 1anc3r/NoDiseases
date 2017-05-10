@@ -10,13 +10,23 @@
         <item
             android:id="@+id/navigation_item_1"
             android:checked="true"
-            android:icon="@drawable/ic_home_black_24dp"
-            android:title="主页" />
+            android:icon="@mipmap/ic_local_hospital_black_24dp"
+            android:title="疾病自查(身体/科室)" />
 
         <item
             android:id="@+id/navigation_item_2"
             android:icon="@mipmap/ic_local_hospital_black_24dp"
-            android:title="看病" />
+            android:title="疾病自查(名称/症状)" />
+
+        <item
+            android:id="@+id/navigation_item_3"
+            android:icon="@mipmap/ic_book_black_24dp"
+            android:title="医学百科" />
+
+        <item
+            android:id="@+id/navigation_item_4"
+            android:icon="@mipmap/ic_add_location_black_24dp"
+            android:title="附近医院" />
 
     </group>
 

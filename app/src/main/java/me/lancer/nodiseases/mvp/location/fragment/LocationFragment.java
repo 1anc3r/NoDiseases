@@ -80,7 +80,12 @@ public class LocationFragment extends PresenterFragment<LocationPresenter> imple
                 case 3:
                     if (msg.obj != null) {
                         for (LocationBean item : (List<LocationBean>) msg.obj) {
-                            AddPosition(item.getX(), item.getY(), item.getName(), item.getAddress(), type);
+                            String address = item.getAddress();
+                            if (address.length() > item.getName().length()) {
+                                AddPosition(item.getX(), item.getY(), item.getName(), address.substring(0, item.getName().length()) + "\n" + address.substring(item.getName().length(), address.length()), type);
+                            }else {
+                                AddPosition(item.getX(), item.getY(), item.getName(), address, type);
+                            }
                         }
                     }
                     mMapView.onCreate(bundle);
@@ -133,7 +138,12 @@ public class LocationFragment extends PresenterFragment<LocationPresenter> imple
                 if (!jb.has("error")) {
                     x = jb.getDouble("x");
                     y = jb.getDouble("y");
-                    NowPosition(x, y, "我的位置", jb.getString("address"));
+                    String address = jb.getString("address");
+                    if (address.length() > 10) {
+                        NowPosition(x, y, "我的位置", address.substring(0, address.length() / 2) + "\n" + address.substring(address.length() / 2, address.length()));
+                    }else {
+                        NowPosition(x, y, "我的位置", address);
+                    }
                 } else {
                     Log.e("error", jb.getString("error"));
                 }
@@ -224,7 +234,7 @@ public class LocationFragment extends PresenterFragment<LocationPresenter> imple
 
     @Override
     public void onInfoWindowClick(Marker marker) {
-        showToast("你点击了infoWindow窗口" + marker.getTitle());
+//        showToast("你点击了infoWindow窗口" + marker.getTitle());
     }
 
     @Override
@@ -233,7 +243,7 @@ public class LocationFragment extends PresenterFragment<LocationPresenter> imple
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        showToast("你点击的是" + marker.getTitle());
+//        showToast("你点击的是" + marker.getTitle());
         return false;
     }
 

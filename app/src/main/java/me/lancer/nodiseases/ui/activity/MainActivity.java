@@ -34,6 +34,7 @@ public class MainActivity extends BaseActivity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle;
     private NavigationView navigationView;
+    private BottomNavigationView bottomNavigationView;
     private Fragment currentFragment;
 
     private int currentIndex;
@@ -53,8 +54,8 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initNavigationViewBottom() {
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
     private void initFragment(Bundle savedInstanceState) {
@@ -98,6 +99,7 @@ public class MainActivity extends BaseActivity {
             drawerLayout.closeDrawers();
             switch (menuItem.getItemId()) {
                 case R.id.navigation_item_1:
+                    bottomNavigationView.setSelectedItemId(R.id.navigation_home);
                     currentIndex = 0;
                     menuItem.setChecked(true);
                     currentFragment = new SystemFragment();
@@ -106,9 +108,28 @@ public class MainActivity extends BaseActivity {
                     switchContent(currentFragment);
                     return true;
                 case R.id.navigation_item_2:
+                    bottomNavigationView.setSelectedItemId(R.id.navigation_home);
                     currentIndex = 0;
                     menuItem.setChecked(true);
                     currentFragment = new DiseaseFragment();
+                    bundle.putInt(getString(R.string.index), currentIndex);
+                    currentFragment.setArguments(bundle);
+                    switchContent(currentFragment);
+                    return true;
+                case R.id.navigation_item_3:
+                    bottomNavigationView.setSelectedItemId(R.id.navigation_dashboard);
+                    currentIndex = 0;
+                    menuItem.setChecked(true);
+                    currentFragment = new MessageFragment();
+                    bundle.putInt(getString(R.string.index), currentIndex);
+                    currentFragment.setArguments(bundle);
+                    switchContent(currentFragment);
+                    return true;
+                case R.id.navigation_item_4:
+                    bottomNavigationView.setSelectedItemId(R.id.navigation_notifications);
+                    currentIndex = 0;
+                    menuItem.setChecked(true);
+                    currentFragment = new LocationFragment();
                     bundle.putInt(getString(R.string.index), currentIndex);
                     currentFragment.setArguments(bundle);
                     switchContent(currentFragment);
