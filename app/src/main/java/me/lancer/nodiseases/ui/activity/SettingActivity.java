@@ -143,11 +143,13 @@ public class SettingActivity extends BaseActivity {
         isNight = sharedPreferences.getBoolean(mParams.ISNIGHT, false);
         scNight.setChecked(isNight);
         scNight.setClickable(false);
-        funcList.add("疾病自查");
-        funcList.add("医学百科");
-        funcList.add("附近医院");
-        problemList.add("遇到Bug可以憋在心里∑(っ°Д°)っ");
-        problemList.add("遇到Bug也可以发送邮件至huangfangzhi0@foxmail.com");
+        funcList.add("疾病自查 : \n" +
+                "\t\t\t\t可以按照身体部位和科室分类来查询疾病，也可以点击右上角搜索按钮按照疾病名称和症状查询疾病，点击结果可以浏览疾病简介、病因、预防、病状、药品、食品、检查等");
+        funcList.add("医学百科\n" +
+                "\t\t\t\t了解医学相关的资讯和知识，按照诸多标签进行分类，以新闻的形式呈现");
+        funcList.add("附近医院\n" +
+                "\t\t\t\t以我的位置为中心，搜索方圆5公里内的医院，地图和定位由高德地图提供");
+        problemList.add("遇到Bug不要憋在心里∑(っ°Д°)っ\n请发送邮件至huangfangzhi0@foxmail.com");
     }
 
     private View.OnClickListener vOnClickListener = new View.OnClickListener() {

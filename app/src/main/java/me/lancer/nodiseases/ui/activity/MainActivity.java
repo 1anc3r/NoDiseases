@@ -2,6 +2,7 @@ package me.lancer.nodiseases.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -37,6 +38,8 @@ public class MainActivity extends BaseActivity {
 
     private int currentIndex;
     private long exitTime;
+
+    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +112,15 @@ public class MainActivity extends BaseActivity {
                     bundle.putInt(getString(R.string.index), currentIndex);
                     currentFragment.setArguments(bundle);
                     switchContent(currentFragment);
+                    return true;
+                case R.id.navigation_setting:
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            startActivity(new Intent().setClass(MainActivity.this, SettingActivity.class));
+                            finish();
+                        }
+                    }, 180);
                     return true;
                 default:
                     return true;
