@@ -24,9 +24,11 @@ import com.android.volley.toolbox.Volley;
 import java.util.List;
 
 import me.lancer.nodiseases.R;
+import me.lancer.nodiseases.mvp.base.activity.BaseActivity;
 import me.lancer.nodiseases.mvp.disease.DiseaseBean;
 import me.lancer.nodiseases.mvp.disease.activity.DiseaseDetailActivity;
 import me.lancer.nodiseases.mvp.message.activity.MessageDetailActivity;
+import me.lancer.nodiseases.ui.application.mApp;
 import me.lancer.nodiseases.util.LruImageCache;
 
 public class DiseaseAdapter extends RecyclerView.Adapter<DiseaseAdapter.ViewHolder> {
@@ -104,11 +106,16 @@ public class DiseaseAdapter extends RecyclerView.Adapter<DiseaseAdapter.ViewHold
                     viewHolder.tvPlace.setText("发病处 : " + item.getPlace());
                     viewHolder.tvKeyword.setText("关键字 : " + item.getKeywords());
                 }
-                LruImageCache cache = LruImageCache.instance();
-                ImageLoader loader = new ImageLoader(mQueue, cache);
-                viewHolder.ivImg.setDefaultImageResId(R.mipmap.ic_pictures_no);
-                viewHolder.ivImg.setErrorImageResId(R.mipmap.ic_pictures_no);
-                viewHolder.ivImg.setImageUrl(item.getImg(), loader);
+                Log.e("isPicture", ((mApp)context.getApplicationContext()).isPicture()+"");
+                if (((mApp)context.getApplicationContext()).isPicture()) {
+                    LruImageCache cache = LruImageCache.instance();
+                    ImageLoader loader = new ImageLoader(mQueue, cache);
+                    viewHolder.ivImg.setDefaultImageResId(R.mipmap.ic_pictures_no);
+                    viewHolder.ivImg.setErrorImageResId(R.mipmap.ic_pictures_no);
+                    viewHolder.ivImg.setImageUrl(item.getImg(), loader);
+                }else{
+                    viewHolder.ivImg.setDefaultImageResId(R.mipmap.ic_pictures_no);
+                }
                 viewHolder.cvLarge.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

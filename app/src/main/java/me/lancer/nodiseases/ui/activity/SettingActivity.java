@@ -2,6 +2,7 @@ package me.lancer.nodiseases.ui.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -44,9 +45,9 @@ public class SettingActivity extends BaseActivity {
 
     private mApp app;
 
-    private LinearLayout llNight, llFunc, llProblem, llFeedback, llDownload, llAboutUs;
+    private LinearLayout llNight, llPicture, llFunc, llProblem, llFeedback, llDownload, llAboutUs;
     private Button btnLoginOut;
-    private SwitchCompat scNight;
+    private SwitchCompat scNight, scPicture;
     private BottomSheetDialog listDialog;
     private AlertDialog aboutDialog;
     private ProgressDialog progressDialog;
@@ -117,6 +118,8 @@ public class SettingActivity extends BaseActivity {
         initToolbar(getString(R.string.settingcn));
         llNight = (LinearLayout) findViewById(R.id.ll_night);
         llNight.setOnClickListener(vOnClickListener);
+        llPicture = (LinearLayout) findViewById(R.id.ll_picture);
+        llPicture.setOnClickListener(vOnClickListener);
         llFunc = (LinearLayout) findViewById(R.id.ll_func);
         llFunc.setOnClickListener(vOnClickListener);
         llProblem = (LinearLayout) findViewById(R.id.ll_problem);
@@ -130,6 +133,7 @@ public class SettingActivity extends BaseActivity {
         btnLoginOut = (Button) findViewById(R.id.btn_login_out);
         btnLoginOut.setOnClickListener(vOnClickListener);
         scNight = (SwitchCompat) findViewById(R.id.sc_night);
+        scPicture = (SwitchCompat) findViewById(R.id.sc_picture);
         progressDialog = new ProgressDialog(SettingActivity.this);
         progressDialog.setMessage("正在加载，请稍后...");
         progressDialog.setCancelable(false);
@@ -143,6 +147,8 @@ public class SettingActivity extends BaseActivity {
         isNight = sharedPreferences.getBoolean(mParams.ISNIGHT, false);
         scNight.setChecked(isNight);
         scNight.setClickable(false);
+        scPicture.setChecked(app.isPicture());
+        scPicture.setClickable(false);
         funcList.add("疾病自查 : \n" +
                 "\t\t\t\t可以按照身体部位和科室分类来查询疾病，也可以点击右上角搜索按钮按照疾病名称和症状查询疾病，点击结果可以浏览疾病简介、病因、预防、病状、药品、食品、检查等");
         funcList.add("医学百科\n" +
@@ -169,7 +175,19 @@ public class SettingActivity extends BaseActivity {
                     getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     recreate();
                 }
-            } else if (v == llFunc) {
+            } else if (v == llPicture) {
+                if (app.isPicture()) {
+                    editor.putBoolean("is_picture", false);
+                    editor.apply();
+                    app.setPicture(false);
+                    scPicture.setChecked(false);
+                } else {
+                    editor.putBoolean("is_picture", true);
+                    editor.apply();
+                    app.setPicture(true);
+                    scPicture.setChecked(true);
+                }
+            }else if (v == llFunc) {
                 showListDialog(1, funcList);
             } else if (v == llProblem) {
                 showListDialog(2, problemList);
@@ -270,5 +288,36 @@ public class SettingActivity extends BaseActivity {
         listDialog = new BottomSheetDialog(mActivity);
         listDialog.setContentView(listDialogView);
         listDialog.show();
+    }
+
+    private void showPictureDialog() {
+        AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(this);
+        builder.setTitle("温馨提醒");
+        builder.setMessage("本应用中某些疾病图片可能会让您感到不适，您可以选择是否加载这些图片(您也可以在设置中重新选择)");
+        builder.setNegativeButton("不加载", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                sharedPreferences = getSharedPreferences(getString(R.string.spf_user), Context.MODE_PRIVATE);
+                editor = sharedPreferences.edit();
+                editor.putBoolean("is_picture", false);
+                editor.putBoolean("is_first", false);
+                editor.commit();
+                app.setPicture(false);
+                app.setFirst(false);
+            }
+        });
+        builder.setPositiveButton("加载", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                sharedPreferences = getSharedPreferences(getString(R.string.spf_user), Context.MODE_PRIVATE);
+                editor = sharedPreferences.edit();
+                editor.putBoolean("is_picture", true);
+                editor.putBoolean("is_first", false);
+                editor.commit();
+                app.setPicture(true);
+                app.setFirst(false);
+            }
+        });
+        builder.show();
     }
 }

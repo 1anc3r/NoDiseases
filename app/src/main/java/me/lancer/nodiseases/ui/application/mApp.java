@@ -18,13 +18,13 @@ import me.lancer.nodiseases.R;
 public class mApp extends Application {
 
     public static Typeface TypeFace;
+    private boolean isPicture, isFirst;
 
     @Override
     public void onCreate() {
         super.onCreate();
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.spf_user), Context.MODE_PRIVATE);
         boolean isNight = sharedPreferences.getBoolean(mParams.ISNIGHT, false);
-//        Log.e(getString(R.string.night), String.valueOf(isNight));
         if (isNight) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {
@@ -40,5 +40,23 @@ public class mApp extends Application {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+        setPicture(sharedPreferences.getBoolean("is_picture", true));
+        setFirst(sharedPreferences.getBoolean("is_first", true));
+    }
+
+    public boolean isPicture() {
+        return isPicture;
+    }
+
+    public void setPicture(boolean picture) {
+        isPicture = picture;
+    }
+
+    public boolean isFirst() {
+        return isFirst;
+    }
+
+    public void setFirst(boolean first) {
+        isFirst = first;
     }
 }
