@@ -114,7 +114,7 @@ public class DiseaseAdapter extends RecyclerView.Adapter<DiseaseAdapter.ViewHold
                     viewHolder.ivImg.setErrorImageResId(R.mipmap.ic_pictures_no);
                     viewHolder.ivImg.setImageUrl(item.getImg(), loader);
                 }else{
-                    viewHolder.ivImg.setDefaultImageResId(R.mipmap.ic_pictures_no);
+                    viewHolder.ivImg.setDefaultImageResId(R.mipmap.ic_pictures_medic);
                 }
                 viewHolder.cvLarge.setOnClickListener(new View.OnClickListener() {
                     @Override
