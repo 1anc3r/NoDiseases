@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import me.lancer.nodiseases.R;
 import me.lancer.nodiseases.mvp.base.fragment.BaseFragment;
+import me.lancer.nodiseases.mvp.disease.fragment.DiseaseFragment;
 import me.lancer.nodiseases.ui.activity.MainActivity;
 
 public class MessageFragment extends BaseFragment {
@@ -125,7 +127,15 @@ public class MessageFragment extends BaseFragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                showToast("...");
+                Fragment newfragment = new DiseaseFragment();
+                Bundle data = new Bundle();
+                data.putInt("what", 3);
+                data.putInt("obj", 0);
+                data.putString("name", query);
+                newfragment.setArguments(data);
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fl_main, newfragment).commit();
+                getActivity().invalidateOptionsMenu();
                 return false;
             }
 
