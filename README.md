@@ -18,9 +18,6 @@
 3. 附近医院 : 
     以我的位置为中心，搜索方圆5公里内的医院，地图和定位由高德地图提供
 
-## 常见问题:
-1. 应用内意见反馈通道尚未开启, 遇到Bug请发送邮件至huangfangzhi0@foxmail.com
-
 ## 应用界面:
 <img src="https://github.com/1anc3r/NoDiseases/blob/master/screenshot/Screenshot_20170510-221636.png?raw=true" width = "288" height = "512" alt=""/><img src="https://github.com/1anc3r/NoDiseases/blob/master/screenshot/Screenshot_20170510-221642.png?raw=true" width = "288" height = "512" alt=""/><img src="https://github.com/1anc3r/NoDiseases/blob/master/screenshot/Screenshot_20170510-221646.png?raw=true" width = "288" height = "512" alt=""/>
 
@@ -35,4 +32,4 @@
 ### 作者
 <img src="http://o7gy5l0ax.bkt.clouddn.com/ic_lancer.jpg" width = "100" height = "100" alt=""/>
 
-我是1anc3r, 西安邮电大学计算机学院软件工程应届生, 正在努力学习Android开发。
+我是1anc3r, 西安邮电大学计算机学院软件工程2018应届毕业生, 正在努力学习Android开发。联系我: huangfangzhi0@foxmail.com。
