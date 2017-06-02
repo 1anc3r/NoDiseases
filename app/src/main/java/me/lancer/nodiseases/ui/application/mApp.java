@@ -7,6 +7,8 @@ import android.graphics.Typeface;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 
+import org.polaric.colorful.Colorful;
+
 import java.lang.reflect.Field;
 
 import me.lancer.nodiseases.R;
@@ -24,12 +26,18 @@ public class mApp extends Application {
     public void onCreate() {
         super.onCreate();
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.spf_user), Context.MODE_PRIVATE);
-        boolean isNight = sharedPreferences.getBoolean(mParams.ISNIGHT, false);
-        if (isNight) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        }
+        boolean night = sharedPreferences.getBoolean(mParams.ISNIGHT, false);
+//        if (night) {
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//        } else {
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//        }
+        Colorful.defaults()
+                .primaryColor(Colorful.ThemeColor.BLUE)
+                .accentColor(Colorful.ThemeColor.BLUE)
+                .translucent(false)
+                .dark(night);
+        Colorful.init(this);
         TypeFace = Typeface.createFromAsset(getAssets(), "fonts/MaterialIcons_Regular.ttf");
         try {
             Field field = Typeface.class.getDeclaredField("SERIF");

@@ -67,6 +67,32 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_theme"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_theme"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginLeft="16dp"
+                        android:src="@mipmap/ic_style_black_18dp"
+                        android:tint="#FF999999" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:text="切换主题"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/ll_picture"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -265,6 +291,7 @@
             android:layout_gravity="bottom"
             android:layout_weight="1"
             android:layout_margin="8dp"
+            android:visibility="gone"
             android:backgroundTint="@color/red"
             android:text="退出应用"
             android:textColor="@color/white"

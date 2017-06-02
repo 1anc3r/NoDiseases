@@ -57,7 +57,7 @@ public class SystemAdapter extends RecyclerView.Adapter<SystemAdapter.ViewHolder
                 viewHolder.tvTitle.setText(list.get(position).getName());
                 viewHolder.tvTitle.setGravity(Gravity.CENTER);
                 viewHolder.tvTitle.setTextColor(context.getResources().getColor(R.color.white));
-                viewHolder.cvGrid.setCardBackgroundColor(context.getResources().getColor(R.color.lightblue));
+                viewHolder.cvGrid.setCardBackgroundColor(context.getResources().getColor(R.color.primary));
             }
             viewHolder.cvGrid.setOnClickListener(new View.OnClickListener() {
                 @Override

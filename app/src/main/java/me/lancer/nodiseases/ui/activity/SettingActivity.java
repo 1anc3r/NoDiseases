@@ -28,6 +28,8 @@ import android.widget.TextView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.polaric.colorful.ColorPickerDialog;
+import org.polaric.colorful.Colorful;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +47,7 @@ public class SettingActivity extends BaseActivity {
 
     private mApp app;
 
-    private LinearLayout llNight, llPicture, llFunc, llProblem, llFeedback, llDownload, llAboutUs;
+    private LinearLayout llNight, llTheme, llPicture, llFunc, llProblem, llFeedback, llDownload, llAboutUs;
     private Button btnLoginOut;
     private SwitchCompat scNight, scPicture;
     private BottomSheetDialog listDialog;
@@ -54,7 +56,7 @@ public class SettingActivity extends BaseActivity {
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    private boolean isNight = false;
+    private boolean night = false;
 
     private List<String> funcList = new ArrayList<>(), problemList = new ArrayList<>();
     private List<RepositoryBean> reList = new ArrayList<>();
@@ -118,6 +120,8 @@ public class SettingActivity extends BaseActivity {
         initToolbar(getString(R.string.settingcn));
         llNight = (LinearLayout) findViewById(R.id.ll_night);
         llNight.setOnClickListener(vOnClickListener);
+        llTheme = (LinearLayout) findViewById(R.id.ll_theme);
+        llTheme.setOnClickListener(vOnClickListener);
         llPicture = (LinearLayout) findViewById(R.id.ll_picture);
         llPicture.setOnClickListener(vOnClickListener);
         llFunc = (LinearLayout) findViewById(R.id.ll_func);
@@ -144,8 +148,8 @@ public class SettingActivity extends BaseActivity {
         app = (mApp) getApplication();
         sharedPreferences = getSharedPreferences(getString(R.string.spf_user), Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
-        isNight = sharedPreferences.getBoolean(mParams.ISNIGHT, false);
-        scNight.setChecked(isNight);
+        night = sharedPreferences.getBoolean(mParams.ISNIGHT, false);
+        scNight.setChecked(night);
         scNight.setClickable(false);
         scPicture.setChecked(app.isPicture());
         scPicture.setClickable(false);
@@ -162,19 +166,52 @@ public class SettingActivity extends BaseActivity {
         @Override
         public void onClick(View v) {
             if (v == llNight) {
-                if (!isNight) {
+                if (!night) {
+//                    editor.putBoolean(mParams.ISNIGHT, true);
+//                    editor.apply();
+//                    scNight.setChecked(true);
+//                    getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//                    recreate();
+                    scNight.setChecked(true);
                     editor.putBoolean(mParams.ISNIGHT, true);
                     editor.apply();
-                    scNight.setChecked(true);
-                    getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    Colorful.config(SettingActivity.this)
+                            .translucent(false)
+                            .dark(true)
+                            .apply();
                     recreate();
                 } else {
+//                    editor.putBoolean(mParams.ISNIGHT, false);
+//                    editor.apply();
+//                    scNight.setChecked(false);
+//                    getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//                    recreate();
+                    scNight.setChecked(false);
                     editor.putBoolean(mParams.ISNIGHT, false);
                     editor.apply();
-                    scNight.setChecked(false);
-                    getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    Colorful.config(SettingActivity.this)
+                            .translucent(false)
+                            .dark(false)
+                            .apply();
                     recreate();
                 }
+                night = !night;
+            } else if (v == llTheme) {
+                ColorPickerDialog dialog = new ColorPickerDialog(SettingActivity.this);
+                dialog.setTitle("切换主题");
+                dialog.setOnColorSelectedListener(new ColorPickerDialog.OnColorSelectedListener() {
+                    @Override
+                    public void onColorSelected(Colorful.ThemeColor themeColor) {
+                        Colorful.config(SettingActivity.this)
+                                .primaryColor(themeColor)
+                                .accentColor(themeColor)
+                                .translucent(false)
+                                .dark(night)
+                                .apply();
+                        recreate();
+                    }
+                });
+                dialog.show();
             } else if (v == llPicture) {
                 if (app.isPicture()) {
                     editor.putBoolean("is_picture", false);

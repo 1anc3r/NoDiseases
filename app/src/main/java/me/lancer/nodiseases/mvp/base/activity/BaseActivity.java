@@ -10,13 +10,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import org.polaric.colorful.CActivity;
+
 import me.lancer.nodiseases.R;
 
 /**
  * Created by HuangFangzhi on 2016/12/13.
  */
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends CActivity {
     public Activity mActivity;
 
     @Override
